@@ -4,6 +4,8 @@ import com.example.trucker_demo.model.VehicleDetails_Model;
 import com.example.trucker_demo.model.VehicleReading_Model;
 import com.example.trucker_demo.repository.VehicleDetailsRepo;
 import com.example.trucker_demo.repository.VehicleReadingsRepo;
+import com.example.trucker_demo.service.VehicleDetailService;
+import com.example.trucker_demo.service.VehicleReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
@@ -12,10 +14,10 @@ import java.util.Arrays;
 public class TruckerDemo_Controller {
 
     @Autowired
-    VehicleDetailsRepo vehicleDetailsRepo;
+    VehicleDetailService vehicleDetailsService;
 
     @Autowired
-    VehicleReadingsRepo vehicleReadingsRepo;
+    VehicleReadingService vehicleReadingsService;
 
     @PutMapping("/vehicles")
     @ResponseBody
@@ -23,9 +25,9 @@ public class TruckerDemo_Controller {
             @RequestBody VehicleDetails_Model[] vehicleDetails_model){
 
         for (VehicleDetails_Model vehicleDetails : vehicleDetails_model) {
-            vehicleDetailsRepo.save(vehicleDetails);
+            vehicleDetailsService.saveAllVehicleDetails(vehicleDetails);
         }
-        System.out.println(Arrays.toString(vehicleDetails_model));
+//        System.out.println(Arrays.toString(vehicleDetails_model));
         return vehicleDetails_model;
 
     }
@@ -35,9 +37,9 @@ public class TruckerDemo_Controller {
     public VehicleReading_Model postVehicleReadings(
             @RequestBody VehicleReading_Model vehicleReading_model){
 
-        vehicleReadingsRepo.save(vehicleReading_model);
+        vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
 
-        System.out.println(vehicleReading_model);
+//        System.out.println(vehicleReading_model);
         return  vehicleReading_model;
     }
 
