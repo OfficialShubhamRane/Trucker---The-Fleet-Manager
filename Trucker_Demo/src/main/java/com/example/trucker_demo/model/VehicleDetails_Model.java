@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -25,10 +26,10 @@ public class VehicleDetails_Model {
     private String vin;
     private String make;
     private String model;
-    private Integer year;
-    private Integer redlineRPM;
-    private Integer maxFuelVolumn;
-    private String lastServiceDate;
+    private int year;
+    private int redlineRPM;
+    private int maxFuelVolumn;
+    private Date lastServiceDate;
 
 
 }

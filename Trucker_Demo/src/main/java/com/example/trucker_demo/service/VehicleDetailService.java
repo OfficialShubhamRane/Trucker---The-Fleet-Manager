@@ -14,6 +14,7 @@ public class VehicleDetailService {
     VehicleDetailsRepo vehicleDetailsRepo;
 
     public void saveAllVehicleDetails(VehicleDetails_Model vehicleDetails){
+
         vehicleDetailsRepo.save(vehicleDetails);
     }
 }

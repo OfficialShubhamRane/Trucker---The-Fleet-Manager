@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +20,7 @@ public class VehicleReading_Model {
     private String vin;
     private Double latitude;
     private Double longitude;
-    private String timestamp;
+    private Date timestamp;
     private float fuelVolumn;
     private float speed;
     private int engineHP;
@@ -30,7 +28,8 @@ public class VehicleReading_Model {
     private boolean engineCoolantLow;
     private boolean cruiseControlOn;
     private int engineRPM;
-//    private Tires_Model tires;
+    @Embedded
+    private Tires_Model tires;
 
 
 }

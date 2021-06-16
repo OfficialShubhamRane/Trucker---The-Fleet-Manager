@@ -27,7 +27,6 @@ public class TruckerDemo_Controller {
         for (VehicleDetails_Model vehicleDetails : vehicleDetails_model) {
             vehicleDetailsService.saveAllVehicleDetails(vehicleDetails);
         }
-//        System.out.println(Arrays.toString(vehicleDetails_model));
         return vehicleDetails_model;
 
     }
@@ -39,7 +38,6 @@ public class TruckerDemo_Controller {
 
         vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
 
-//        System.out.println(vehicleReading_model);
         return  vehicleReading_model;
     }
 
