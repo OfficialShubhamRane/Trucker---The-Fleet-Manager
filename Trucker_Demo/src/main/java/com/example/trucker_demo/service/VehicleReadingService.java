@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Basic;
+import java.util.List;
 
 @Service
 public class VehicleReadingService {
@@ -19,7 +20,7 @@ public class VehicleReadingService {
     @Autowired
     VehicleDetailsRepo vehicleDetailsRepo;
 
-    public boolean saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
+    public VehicleReading_Model saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
 
         VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.getById( vehicleReading_model.getVin() );
 
@@ -48,8 +49,14 @@ public class VehicleReadingService {
             System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON: Low Priority");
         }
 
+//        System.out.println( vehicleReading_model );
         vehicleReadingsRepo.save(vehicleReading_model);
 
-        return true;
+        return vehicleReading_model;
+    }
+
+    public List<VehicleReading_Model> getAllVehicleReadings() {
+
+        return vehicleReadingsRepo.findAll();
     }
 }
