@@ -16,15 +16,12 @@ public class VehicleDetailService {
     @Autowired
     VehicleDetailsRepo vehicleDetailsRepo;
 
-    public boolean saveAllVehicleDetails(VehicleDetails_Model[] vehicleDetailsArray){
+    public void saveAllVehicleDetails(VehicleDetails_Model[] vehicleDetailsArray){
 
-        boolean isSaved = false;
         for (VehicleDetails_Model vehicleDetails : vehicleDetailsArray) {
 //            System.out.println( vehicleDetails );
             vehicleDetailsRepo.save(vehicleDetails);
-            isSaved = true;
         }
-        return isSaved;
     }
 
     public List<VehicleDetails_Model> getAllVehicleDetails() {

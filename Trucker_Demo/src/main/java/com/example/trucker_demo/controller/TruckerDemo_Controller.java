@@ -20,18 +20,17 @@ public class TruckerDemo_Controller {
 
     @PutMapping("/vehicles")
     @ResponseBody
-    public boolean postVehicleDetails(
+    public void postVehicleDetails(
             @RequestBody VehicleDetails_Model[] vehicleDetails_model){
-        return vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
+        vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
     }
 
     @PostMapping("/readings")
     @ResponseBody
-    public boolean postVehicleReadings(
+    public void postVehicleReadings(
             @RequestBody VehicleReading_Model vehicleReading_model){
 
-//        System.out.println(vehicleReading_model);
-        return vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
+        vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
     }
 
     @GetMapping("/api/vehicles")
