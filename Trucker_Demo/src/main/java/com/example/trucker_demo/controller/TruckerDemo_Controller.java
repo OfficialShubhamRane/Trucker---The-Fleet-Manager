@@ -24,9 +24,7 @@ public class TruckerDemo_Controller {
     public VehicleDetails_Model[] postVehicleDetails(
             @RequestBody VehicleDetails_Model[] vehicleDetails_model){
 
-        for (VehicleDetails_Model vehicleDetails : vehicleDetails_model) {
-            vehicleDetailsService.saveAllVehicleDetails(vehicleDetails);
-        }
+        vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
         return vehicleDetails_model;
 
     }

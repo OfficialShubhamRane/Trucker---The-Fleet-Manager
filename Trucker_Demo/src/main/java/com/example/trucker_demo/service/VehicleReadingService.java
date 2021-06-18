@@ -19,12 +19,9 @@ public class VehicleReadingService {
     @Autowired
     VehicleDetailsRepo vehicleDetailsRepo;
 
-    VehicleDetails_Model vehicleDetails_model;
+    public boolean saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
 
-    public void saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
-
-        String currVehicleVIN = vehicleReading_model.getVin();
-        vehicleDetails_model = vehicleDetailsRepo.getById(currVehicleVIN);
+        VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.getById( vehicleReading_model.getVin() );
 
         /** engineRpm > readlineRpm, Priority: HIGH */
         if( vehicleReading_model.getEngineRPM() > vehicleDetails_model.getRedlineRPM()){
@@ -52,5 +49,7 @@ public class VehicleReadingService {
         }
 
         vehicleReadingsRepo.save(vehicleReading_model);
+
+        return true;
     }
 }
