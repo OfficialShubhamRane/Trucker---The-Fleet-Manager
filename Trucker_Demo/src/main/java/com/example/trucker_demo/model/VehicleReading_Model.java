@@ -21,13 +21,13 @@ public class VehicleReading_Model {
     private Double latitude;
     private Double longitude;
     private Date timestamp;
-    private float fuelVolumn;   //
-    private float speed;
-    private int engineHP;   //
-    private boolean checkEnginLightsOn;
+    private Float fuelVolume;   //
+    private Float speed;
+    private Integer engineHp;   //
+    private boolean checkEngineLightOn;
     private boolean engineCoolantLow;
     private boolean cruiseControlOn;
-    private int engineRPM;  //
+    private Integer engineRpm;  //
     @Embedded
     private Tires_Model tires;
 

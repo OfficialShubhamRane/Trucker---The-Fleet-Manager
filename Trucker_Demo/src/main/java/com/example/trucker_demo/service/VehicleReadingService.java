@@ -20,17 +20,18 @@ public class VehicleReadingService {
     @Autowired
     VehicleDetailsRepo vehicleDetailsRepo;
 
-    public VehicleReading_Model saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
+    public boolean saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
 
+        boolean isSaved = false;
         VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.getById( vehicleReading_model.getVin() );
 
         /** engineRpm > readlineRpm, Priority: HIGH */
-        if( vehicleReading_model.getEngineRPM() > vehicleDetails_model.getRedlineRPM()){
-            System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM: High Priority");
+        if( vehicleReading_model.getEngineRpm() > vehicleDetails_model.getRedlineRpm()){
+            System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
         }
 
         /** fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM */
-        if(vehicleReading_model.getFuelVolumn() < vehicleDetails_model.getMaxFuelVolumn()/10.0){
+        if(vehicleReading_model.getFuelVolume() < vehicleDetails_model.getMaxFuelVolume()/10.0){
             System.out.println( vehicleReading_model.getVin() + ": fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM ");
         }
 
@@ -40,19 +41,19 @@ public class VehicleReadingService {
                 32>vehicleReading_model.getTires().getRearLeft()||vehicleReading_model.getTires().getRearLeft()>36||
                 32>vehicleReading_model.getTires().getRearRight()||vehicleReading_model.getTires().getRearRight()>36){
 
-            System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW : Low Priority");
+            System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW, Priority: LOW");
 
         }
 
         /** engineCoolantLow = true || checkEngineLightOn = true, Priority: LOW */
-        if( vehicleReading_model.isEngineCoolantLow() || vehicleReading_model.isCheckEnginLightsOn()){
-            System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON: Low Priority");
+        if( vehicleReading_model.isEngineCoolantLow()|| vehicleReading_model.isCheckEngineLightOn() ){
+            System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON, Priority: LOW");
         }
 
 //        System.out.println( vehicleReading_model );
         vehicleReadingsRepo.save(vehicleReading_model);
-
-        return vehicleReading_model;
+        isSaved = true;
+        return isSaved;
     }
 
     public List<VehicleReading_Model> getAllVehicleReadings() {

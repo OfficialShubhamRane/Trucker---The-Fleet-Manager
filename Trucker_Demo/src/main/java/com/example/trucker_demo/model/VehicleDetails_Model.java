@@ -26,9 +26,9 @@ public class VehicleDetails_Model {
     private String vin;
     private String make;
     private String model;
-    private int year;
-    private int redlineRPM;
-    private int maxFuelVolumn;
+    private Integer year;
+    private Integer redlineRpm;
+    private Integer maxFuelVolume;
     private Date lastServiceDate;
 
 

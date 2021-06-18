@@ -20,22 +20,18 @@ public class TruckerDemo_Controller {
 
     @PutMapping("/vehicles")
     @ResponseBody
-    public VehicleDetails_Model[] postVehicleDetails(
+    public boolean postVehicleDetails(
             @RequestBody VehicleDetails_Model[] vehicleDetails_model){
-
-        vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
-        return vehicleDetails_model;
-
+        return vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
     }
 
     @PostMapping("/readings")
     @ResponseBody
-    public VehicleReading_Model postVehicleReadings(
+    public boolean postVehicleReadings(
             @RequestBody VehicleReading_Model vehicleReading_model){
 
 //        System.out.println(vehicleReading_model);
-        vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
-        return  vehicleReading_model;
+        return vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
     }
 
     @GetMapping("/api/vehicles")
@@ -48,7 +44,7 @@ public class TruckerDemo_Controller {
         return vehicleReadingsService.getAllVehicleReadings();
     }
 
-    /** Front end under construction */
+    /** Front end under construction  */
     @GetMapping("/Trucker")
     @ResponseBody
     public String showIndexPage(Model model, VehicleDetails_Model[] vehicleDetails_models){
