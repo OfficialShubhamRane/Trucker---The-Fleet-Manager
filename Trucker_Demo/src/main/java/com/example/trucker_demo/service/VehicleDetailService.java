@@ -6,6 +6,7 @@ import com.example.trucker_demo.repository.VehicleReadingsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -25,7 +26,13 @@ public class VehicleDetailService {
     }
 
     public List<VehicleDetails_Model> getAllVehicleDetails() {
-
         return vehicleDetailsRepo.findAll();
     }
+
+
+    public void showVehicleDetails(Model model, VehicleDetails_Model[] vehicleDetails_models) {
+        model.addAttribute("vehicleDetailsArray",vehicleDetails_models);
+    }
+
+
 }
