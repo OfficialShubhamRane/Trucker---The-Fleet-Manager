@@ -2,11 +2,8 @@ package com.example.trucker_demo.service;
 
 import com.example.trucker_demo.model.VehicleDetails_Model;
 import com.example.trucker_demo.repository.VehicleDetailsRepo;
-import com.example.trucker_demo.repository.VehicleReadingsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class VehicleDetailService {
     @Autowired
     VehicleDetailsRepo vehicleDetailsRepo;
 
+    /** Save all vehicles all details */
     public void saveAllVehicleDetails(VehicleDetails_Model[] vehicleDetailsArray){
 
         for (VehicleDetails_Model vehicleDetails : vehicleDetailsArray) {
@@ -24,14 +22,14 @@ public class VehicleDetailService {
         }
     }
 
+    /** REST api for returning all vehicles all details */
     public List<VehicleDetails_Model> getAllVehicleDetails() {
         return vehicleDetailsRepo.findAll();
     }
 
+    /** Rest api for returning specific vehicle details */
+    public VehicleDetails_Model getVehicleDetails(String vin) {
 
-    public void showVehicleDetails(Model model, VehicleDetails_Model[] vehicleDetails_models) {
-        model.addAttribute("vehicleDetailsArray",vehicleDetails_models);
+        return vehicleDetailsRepo.findAllByVin(vin);
     }
-
-
 }

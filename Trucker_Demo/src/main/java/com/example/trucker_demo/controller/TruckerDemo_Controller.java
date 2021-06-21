@@ -1,11 +1,12 @@
 package com.example.trucker_demo.controller;
 
+import com.example.trucker_demo.model.Alerts_Model;
 import com.example.trucker_demo.model.VehicleDetails_Model;
 import com.example.trucker_demo.model.VehicleReading_Model;
+import com.example.trucker_demo.service.AlertsService;
 import com.example.trucker_demo.service.VehicleDetailService;
 import com.example.trucker_demo.service.VehicleReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class TruckerDemo_Controller {
     @Autowired
     VehicleReadingService vehicleReadingsService;
 
+    @Autowired
+    AlertsService alertsService;
+
+    /** Accepts vehicle details from http://localhost:8080/vehicles */
     @PutMapping("/vehicles")
     @ResponseBody
     public void postVehicleDetails(
@@ -25,6 +30,7 @@ public class TruckerDemo_Controller {
         vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
     }
 
+    /** Accepts vehicle details from http://localhost:8080/readings */
     @PostMapping("/readings")
     @ResponseBody
     public void postVehicleReadings(
@@ -33,23 +39,42 @@ public class TruckerDemo_Controller {
         vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
     }
 
+    /** REST API: Returns all vehicles all details */
     @GetMapping("/api/vehicles")
-    public List<VehicleDetails_Model> getAllVehicleDetails_models(){
+    public List<VehicleDetails_Model> getAllVehiclesDetails(){
         return vehicleDetailsService.getAllVehicleDetails();
     }
 
+    /** REST API: Returns all vehicles all readings */
     @GetMapping("/api/readings")
-    public List<VehicleReading_Model> getAllVehicleReading_models(){
+    public List<VehicleReading_Model> getAllVehiclesReading(){
         return vehicleReadingsService.getAllVehicleReadings();
     }
 
-    /** Front end under construction  */
-    @GetMapping("/Trucker")
-    @ResponseBody
-    public String showIndexPage(Model model, VehicleDetails_Model[] vehicleDetails_models){
-//        vehicleDetailsService.showVehicleDetails(model, vehicleDetails_models);
-        return "index";
+    /** REST API: Returns all vehicles all alerts */
+    @GetMapping("/api/alerts")
+    public List<Alerts_Model> getAllAlerts(){
+        return alertsService.getAllAlerts();
     }
+
+    /** REST API: Returns specific vehicles all details using VIN as key */
+    @GetMapping("/api/getVehicleDetails/{vin}")
+    public VehicleDetails_Model getVehicleDetails(@PathVariable("vin") String vin){
+        return vehicleDetailsService.getVehicleDetails(vin);
+    }
+
+    /** REST API: Returns specific vehicles all alerts using VIN as key */
+    @GetMapping("api/getVehicleAlerts/{vin}")
+    public List<Alerts_Model> getVehicleAlerts(@PathVariable("vin") String vin){
+        return alertsService.getVehicleAlerts(vin);
+    }
+
+    /** REST API for returning all vehicles HIGH alerts from last 2 hours */
+    @GetMapping("api/getRecentAlerts")
+    public List<Alerts_Model> getRecentAlerts(){
+        return alertsService.getRecentAlerts();
+    }
+
 
 
 

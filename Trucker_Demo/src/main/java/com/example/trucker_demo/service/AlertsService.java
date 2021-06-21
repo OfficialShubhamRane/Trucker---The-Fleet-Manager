@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AlertsService  {
@@ -16,6 +17,10 @@ public class AlertsService  {
     @Autowired
     AlertsRepo alertsRepo;
 
+    @Autowired
+    MailSenderService mailSenderService;
+
+    /** Check for alerts comparing details and reading values */
     public void checkForAlerts(VehicleDetails_Model vehicleDetails_model, VehicleReading_Model vehicleReading_model) {
 
         String alertRule = null;
@@ -27,6 +32,12 @@ public class AlertsService  {
             alertRule = "Rule 1";
             alertLevel = "HIGH";
             saveAlerts(vin, alertRule, alertLevel);
+
+            String body = "Vehicle "+vin+" is crossing the Red line RPM of " + vehicleDetails_model.getRedlineRpm()
+                    + " to " + vehicleReading_model.getEngineRpm();
+            String subject = "HIGH priority alert on vehicle: "+vin;
+
+            mailSenderService.sendEmail(body ,subject );
             System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
         }
@@ -63,6 +74,7 @@ public class AlertsService  {
 
     }
 
+    /** Saving every generated alert for every vehicle */
     private void saveAlerts(String vin, String alertRule, String alertLevel){
         Alerts_Model alerts_model = new Alerts_Model();
         alerts_model.setVin(vin);
@@ -72,5 +84,22 @@ public class AlertsService  {
         alerts_model.setTimestamp(new Timestamp(date.getTime()));
         alertsRepo.save(alerts_model);
     }
+
+    /** Rest api for returning all vehicle alerts */
+    public List<Alerts_Model> getAllAlerts() {
+        return alertsRepo.findAll();
+    }
+
+    /** REST api returning vehicle specific alerts based on VIN as key */
+    public List<Alerts_Model> getVehicleAlerts(String vin) {
+        return alertsRepo.findAllByVin(vin);
+    }
+
+    /** REST API for returning all vehicles HIGH alerts from last 2 hours */
+    public List<Alerts_Model> getRecentAlerts() {
+        return alertsRepo.findAllByTimestamp();
+    }
+
+
 
 }

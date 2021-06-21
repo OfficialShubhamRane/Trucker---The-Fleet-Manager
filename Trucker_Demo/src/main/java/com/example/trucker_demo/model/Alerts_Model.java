@@ -26,6 +26,7 @@ public class Alerts_Model {
     private String rule;
     private String alertLevel;
 
+    /** Generated unique ID for every alerts as VIN cannot be used unique key */
     public  Alerts_Model(){
         this.alertID = UUID.randomUUID().toString();
     }
