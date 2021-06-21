@@ -37,7 +37,7 @@ public class AlertsService  {
                     + " to " + vehicleReading_model.getEngineRpm();
             String subject = "HIGH priority alert on vehicle: "+vin;
 
-            mailSenderService.sendEmail(body ,subject );
+//            mailSenderService.sendEmail(body ,subject );
             System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
         }
@@ -96,10 +96,18 @@ public class AlertsService  {
     }
 
     /** REST API for returning all vehicles HIGH alerts from last 2 hours */
-    public List<Alerts_Model> getRecentAlerts() {
-        return alertsRepo.findAllByTimestamp();
+    public List<Alerts_Model> getRecentAlerts(String orderBy) {
+
+        if( orderBy == null){
+            return alertsRepo.findAllByTimestamp();
+        }
+        else if(orderBy.equalsIgnoreCase("asc")){
+            return alertsRepo.findAllByASCTimestamp();
+        }else if(orderBy.equalsIgnoreCase("desc")){
+            return alertsRepo.findAllByDSCTimestamp();
+        }
+        return null;
+
     }
-
-
 
 }

@@ -17,4 +17,9 @@ public interface AlertsRepo extends JpaRepository<Alerts_Model, String> {
     @Query("SELECT a FROM Alerts_Model a WHERE a.timestamp <= (CURRENT_TIMESTAMP - '+0 02:00:00.000000000')")
     List<Alerts_Model> findAllByTimestamp();
 
+    @Query("SELECT a FROM Alerts_Model a WHERE a.timestamp <= (CURRENT_TIMESTAMP - '+0 02:00:00.000000000') ORDER BY a.timestamp ASC")
+    List<Alerts_Model> findAllByASCTimestamp();
+
+    @Query("SELECT a FROM Alerts_Model a WHERE a.timestamp <= (CURRENT_TIMESTAMP - '+0 02:00:00.000000000') ORDER BY a.timestamp DESC")
+    List<Alerts_Model> findAllByDSCTimestamp();
 }

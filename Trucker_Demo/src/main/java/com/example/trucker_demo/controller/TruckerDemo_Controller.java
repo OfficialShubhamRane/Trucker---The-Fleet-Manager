@@ -22,7 +22,7 @@ public class TruckerDemo_Controller {
     @Autowired
     AlertsService alertsService;
 
-    /** Accepts vehicle details from http://localhost:8080/vehicles */
+    /** 1.1 Accepts vehicle details from http://localhost:8080/vehicles */
     @PutMapping("/vehicles")
     @ResponseBody
     public void postVehicleDetails(
@@ -30,7 +30,7 @@ public class TruckerDemo_Controller {
         vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
     }
 
-    /** Accepts vehicle details from http://localhost:8080/readings */
+    /** 1.3 Accepts vehicle details from http://localhost:8080/readings */
     @PostMapping("/readings")
     @ResponseBody
     public void postVehicleReadings(
@@ -39,7 +39,7 @@ public class TruckerDemo_Controller {
         vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
     }
 
-    /** REST API: Returns all vehicles all details */
+    /** 3.1 REST API: Returns all vehicles all details */
     @GetMapping("/api/vehicles")
     public List<VehicleDetails_Model> getAllVehiclesDetails(){
         return vehicleDetailsService.getAllVehicleDetails();
@@ -63,16 +63,16 @@ public class TruckerDemo_Controller {
         return vehicleDetailsService.getVehicleDetails(vin);
     }
 
-    /** REST API: Returns specific vehicles all alerts using VIN as key */
+    /** 3.5 REST API: Returns specific vehicles all alerts using VIN as key */
     @GetMapping("api/getVehicleAlerts/{vin}")
     public List<Alerts_Model> getVehicleAlerts(@PathVariable("vin") String vin){
         return alertsService.getVehicleAlerts(vin);
     }
 
-    /** REST API for returning all vehicles HIGH alerts from last 2 hours */
-    @GetMapping("api/getRecentAlerts")
-    public List<Alerts_Model> getRecentAlerts(){
-        return alertsService.getRecentAlerts();
+    /** 3.2 REST API for returning all vehicles HIGH alerts from last 2 hours */
+    @GetMapping({"api/getRecentAlerts","api/getRecentAlerts/{orderBy}"})
+    public List<Alerts_Model> getRecentAlerts(@PathVariable(required = false) String orderBy){
+        return alertsService.getRecentAlerts(orderBy);
     }
 
 
