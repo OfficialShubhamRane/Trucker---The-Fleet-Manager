@@ -75,7 +75,16 @@ public class TruckerDemo_Controller {
         return alertsService.getRecentAlerts(orderBy);
     }
 
-
+    /** 3.3 REST api for returning specific signal history of specific vehicles over user defined time range */
+    /*
+    @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
+    public List<VehicleReading_Model> getSignalHistoryOver(
+            @PathVariable String vin,
+            @PathVariable String attribute,
+            @PathVariable String minutes){
+        return vehicleReadingsService.getSignalHistoryOver(vin, attribute, minutes);
+    }
+    */
 
 
 }

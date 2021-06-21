@@ -37,7 +37,7 @@ public class AlertsService  {
                     + " to " + vehicleReading_model.getEngineRpm();
             String subject = "HIGH priority alert on vehicle: "+vin;
 
-//            mailSenderService.sendEmail(body ,subject );
+            mailSenderService.sendEmail(body ,subject );
             System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
         }

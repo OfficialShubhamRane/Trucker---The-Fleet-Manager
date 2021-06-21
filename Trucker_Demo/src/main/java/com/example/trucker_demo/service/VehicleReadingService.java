@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleReadingService {
@@ -36,4 +37,11 @@ public class VehicleReadingService {
     public List<VehicleReading_Model> getAllVehicleReadings() {
         return vehicleReadingsRepo.findAll();
     }
+
+    /** returning specific signal history of specific vehicles over user defined time range */
+    /*
+    public List<VehicleReading_Model> getSignalHistoryOver(String vin, String attribute, String minutes) {
+        return vehicleReadingsRepo.findAllSignalReadings(vin, attribute, minutes);
+    }
+    */
 }
