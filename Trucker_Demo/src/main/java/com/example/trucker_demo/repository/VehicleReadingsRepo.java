@@ -18,4 +18,6 @@ public interface VehicleReadingsRepo extends JpaRepository<VehicleReading_Model,
             @Param("attribute") String attribute,
             @Param("minutes") String minutes);
      */
+
+    List<VehicleReading_Model> findAllByVin(String vin);
 }

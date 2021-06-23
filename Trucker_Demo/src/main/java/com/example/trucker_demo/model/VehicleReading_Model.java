@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table
 public class VehicleReading_Model {
 
     @Id
     @NotNull
+    private String readingUUID;
     private String vin;
     private Double latitude;
     private Double longitude;
@@ -31,5 +32,8 @@ public class VehicleReading_Model {
     @Embedded
     private Tires_Model tires;
 
+    public VehicleReading_Model(){
+        this.readingUUID = UUID.randomUUID().toString();
+    }
 
 }

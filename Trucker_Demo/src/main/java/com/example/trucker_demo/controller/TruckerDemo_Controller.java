@@ -2,13 +2,22 @@ package com.example.trucker_demo.controller;
 
 import com.example.trucker_demo.model.Alerts_Model;
 import com.example.trucker_demo.model.VehicleDetails_Model;
+import com.example.trucker_demo.model.VehicleLocation_Model;
 import com.example.trucker_demo.model.VehicleReading_Model;
+import com.example.trucker_demo.repository.VehicleReadingsRepo;
 import com.example.trucker_demo.service.AlertsService;
+import com.example.trucker_demo.service.RevGeoLocationService;
 import com.example.trucker_demo.service.VehicleDetailService;
 import com.example.trucker_demo.service.VehicleReadingService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TruckerDemo_Controller {
@@ -21,6 +30,9 @@ public class TruckerDemo_Controller {
 
     @Autowired
     AlertsService alertsService;
+
+    @Autowired
+    RevGeoLocationService revGeoLocationService;
 
     /** 1.1 Accepts vehicle details from http://localhost:8080/vehicles */
     @PutMapping("/vehicles")
@@ -86,5 +98,36 @@ public class TruckerDemo_Controller {
     }
     */
 
+    /** 3.4 Demo */
+    @GetMapping("api/getGeoCode")
+    public void getRevGeoCoding() throws IOException, InterruptedException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        String response = revGeoLocationService.revGeoCode("41.803194,-88.144406");
+//        System.out.println(response);
+        JsonNode responseJsonNode = mapper.readTree(response);
+        JsonNode items = responseJsonNode.get("items");
+
+        for (JsonNode item : items) {
+            JsonNode address = item.get("address");
+            String label = address.get("label").asText();
+            JsonNode position = item.get("position");
+
+            String lat = position.get("lat").asText();
+            String lng = position.get("lng").asText();
+            System.out.println(label + " is located at " + lat + "," + lng + ".");
+        }
+
+    }
+
+    /** 3.4 Vehicle's location in last 30 mins */
+    @GetMapping("/api/getVehicleLocation/{vin}")
+    public List<VehicleLocation_Model> getVehicleLocation(
+            @PathVariable("vin") String vin
+    ) throws IOException, InterruptedException {
+
+        return revGeoLocationService.getVehicleLocation(vin);
+
+    }
 
 }

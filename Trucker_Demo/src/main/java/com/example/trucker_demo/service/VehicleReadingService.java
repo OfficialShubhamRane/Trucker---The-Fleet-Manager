@@ -25,11 +25,25 @@ public class VehicleReadingService {
     /** Save all vehicles all readings */
     public void saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
 
-        VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.getById( vehicleReading_model.getVin() );
+        VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.findByVin( vehicleReading_model.getVin() );
 
-        alertsService.checkForAlerts(vehicleDetails_model, vehicleReading_model );
+        VehicleReading_Model tempReadingModel = new VehicleReading_Model();
+        tempReadingModel.setVin(vehicleReading_model.getVin());
+        tempReadingModel.setLatitude(vehicleReading_model.getLatitude());
+        tempReadingModel.setLongitude(vehicleReading_model.getLongitude());
+        tempReadingModel.setTimestamp(vehicleReading_model.getTimestamp());
+        tempReadingModel.setFuelVolume(vehicleReading_model.getFuelVolume());
+        tempReadingModel.setSpeed(vehicleReading_model.getSpeed());
+        tempReadingModel.setEngineHp(vehicleReading_model.getEngineHp());
+        tempReadingModel.setCheckEngineLightOn(vehicleReading_model.isCheckEngineLightOn());
+        tempReadingModel.setEngineCoolantLow(vehicleReading_model.isEngineCoolantLow());
+        tempReadingModel.setCruiseControlOn(vehicleReading_model.isCruiseControlOn());
+        tempReadingModel.setEngineRpm(vehicleReading_model.getEngineRpm());
+        tempReadingModel.setTires(vehicleReading_model.getTires());
 
-        vehicleReadingsRepo.save(vehicleReading_model);
+        alertsService.checkForAlerts(vehicleDetails_model, tempReadingModel );
+
+        vehicleReadingsRepo.save(tempReadingModel);
 
     }
 
@@ -38,10 +52,14 @@ public class VehicleReadingService {
         return vehicleReadingsRepo.findAll();
     }
 
-    /** returning specific signal history of specific vehicles over user defined time range */
-    /*
-    public List<VehicleReading_Model> getSignalHistoryOver(String vin, String attribute, String minutes) {
-        return vehicleReadingsRepo.findAllSignalReadings(vin, attribute, minutes);
+    /** Rest api for getting vehicles co ordinates over last 30 mins */
+    public List<VehicleReading_Model> getVehicleCoordinates(String vin) {
+        return vehicleReadingsRepo.findAllByVin(vin);
     }
-    */
+
+//    /** returning specific signal history of specific vehicles over user defined time range */
+//    public List<VehicleReading_Model> getSignalHistoryOver(String vin, String attribute, String minutes) {
+//        return vehicleReadingsRepo.findAllSignalReadings(vin, attribute, minutes);
+//    }
+
 }

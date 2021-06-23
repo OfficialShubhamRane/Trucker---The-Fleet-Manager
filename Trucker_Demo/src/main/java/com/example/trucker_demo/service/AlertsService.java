@@ -38,7 +38,7 @@ public class AlertsService  {
             String subject = "HIGH priority alert on vehicle: "+vin;
 
             mailSenderService.sendEmail(body ,subject );
-            System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
+//            System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
         }
 
@@ -47,7 +47,7 @@ public class AlertsService  {
             alertRule = "Rule 2";
             alertLevel = "MEDIUM";
             saveAlerts(vin, alertRule, alertLevel);
-            System.out.println( vehicleReading_model.getVin() + ": fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM ");
+//            System.out.println( vehicleReading_model.getVin() + ": fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM ");
 
         }
 
@@ -59,7 +59,7 @@ public class AlertsService  {
             alertRule = "Rule 3";
             alertLevel = "LOW";
             saveAlerts(vin, alertRule, alertLevel);
-            System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW, Priority: LOW");
+//            System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW, Priority: LOW");
 
         }
 
@@ -68,7 +68,7 @@ public class AlertsService  {
             alertRule = "Rule 4";
             alertLevel = "LOW";
             saveAlerts(vin, alertRule, alertLevel);
-            System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON, Priority: LOW");
+//            System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON, Priority: LOW");
 
         }
 
@@ -100,8 +100,7 @@ public class AlertsService  {
 
         if( orderBy == null){
             return alertsRepo.findAllByTimestamp();
-        }
-        else if(orderBy.equalsIgnoreCase("asc")){
+        }else if(orderBy.equalsIgnoreCase("asc")){
             return alertsRepo.findAllByASCTimestamp();
         }else if(orderBy.equalsIgnoreCase("desc")){
             return alertsRepo.findAllByDSCTimestamp();
