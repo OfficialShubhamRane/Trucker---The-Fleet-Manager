@@ -1,5 +1,52 @@
 # Trucker---The-Fleet-Manager
 Fleet Managment Application for Egen Solutions.
+    Any organization that needs commercial vehicles to function engages in some form of fleet operations and fleet management. The purpose of fleet management is to oversee all fleet performance and fleet maintenance in order to increase productivity and help a business run as smoothly as possible.
+
+Sample Data:
+    Vehicle Details: 
+    Make PUT request on http://localhost:8080/vehicles
+        [
+            {
+                "vin": "1HGCR2F3XFA027534",
+                "make": "HONDA",
+                "model": "ACCORD",
+                "year": 2015,
+                "redlineRpm": 5500,
+                "maxFuelVolume": 15,
+                "lastServiceDate": "2017-05-25T17:31:25.268Z"
+            },
+            {
+                "vin": "WP1AB29P63LA60179",
+                "make": "PORSCHE",
+                "model": "CAYENNE",
+                "year": 2015,
+                "redlineRpm": 8000,
+                "maxFuelVolume": 18,
+                "lastServiceDate": "2017-03-25T17:31:25.268Z"
+            }
+        ]
+
+    Vehicle Reading:
+    Make POST request on http://localhost:8080/readings
+        {
+            "vin": "1HGCR2F3XFA027534",
+            "latitude": 41.803194,
+            "longitude": -88.144406,
+            "timestamp": "2017-05-25T17:31:25.268Z",
+            "fuelVolume": 1.5,
+            "speed": 85,
+            "engineHp": 240,
+            "checkEngineLightOn": false,
+            "engineCoolantLow": true,
+            "cruiseControlOn": true,
+            "engineRpm": 6300,
+            "tires": {
+                "frontLeft": 34,
+                "frontRight": 36,
+                "rearLeft": 29,
+                "rearRight": 34
+            }
+        }
 
 
 Project Trucker
