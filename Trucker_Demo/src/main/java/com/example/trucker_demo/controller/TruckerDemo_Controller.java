@@ -65,17 +65,15 @@ public class TruckerDemo_Controller {
         return vehicleDetailsService.getVehicleDetails(vin);
     }
 
-    /** Returns all vehicles all alerts */
-    /** Override this with Optional for requirment 3.5 */
-    @GetMapping("/api/alerts")
-    public List<Alerts_Model> getAllAlerts(){
-        return alertsService.getAllAlerts();
-    }
-
-    /** 3.5 Returns specific vehicles all alerts using VIN as key */
-    @GetMapping("api/alerts/{vin}")
-    public List<Alerts_Model> getVehicleAlerts(@PathVariable("vin") String vin){
-        return alertsService.getVehicleAlerts(vin);
+    /** 3.5 Returns all vehicles all alerts OR specified vehicles all alerts */
+    @GetMapping({"/api/alerts", "api/alerts/{vin}"})
+    public List<Alerts_Model> getAllAlerts( @PathVariable(required = false) String vin){
+        if(vin == null){
+            return alertsService.getAllAlerts();
+        }
+        else {
+            return alertsService.getVehicleAlerts(vin);
+        }
     }
 
     /** 3.2 returning all vehicles HIGH alerts from last 2 hours */
