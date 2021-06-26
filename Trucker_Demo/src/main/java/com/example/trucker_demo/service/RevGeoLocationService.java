@@ -26,6 +26,7 @@ public class RevGeoLocationService {
     private static final String GEOCODING_RESOURCE = "https://revgeocode.search.hereapi.com/v1/revgeocode";
     private static final String API_KEY = "SpbwGUl2-MIjGSbYWWwXdWshcNKeJOCVAYZCvrXIXaM";
 
+    /** Return location in form of http response body */
     public String revGeoCode(String query) throws IOException, InterruptedException {
 
         HttpClient httpClient = HttpClient.newHttpClient();
@@ -43,6 +44,7 @@ public class RevGeoLocationService {
 
     }
 
+    /** Extracts address from HTTP response body  */
     public VehicleLocation_Model getLocation(String coordinates) throws IOException, InterruptedException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -65,26 +67,21 @@ public class RevGeoLocationService {
             vehicleLocation_model.setLatitude(position.get("lat").asText());
             vehicleLocation_model.setLongitude(position.get("lng").asText());
 
-//            System.out.println(label + " is located at " + lat + "," + lng + ".");
         }
         return vehicleLocation_model;
     }
 
+    /** Returns List of addresses including Latitude and longitude for each reading */
     public List<VehicleLocation_Model> getVehicleLocation(String vin) throws IOException, InterruptedException {
-        //Getting latitude and longitude
 
         List<VehicleReading_Model> vehicleReading_Model = vehicleReadingsService.getVehicleCoordinates(vin);
         List<VehicleLocation_Model> addresses = new ArrayList<>();
 
         for (VehicleReading_Model vehicleReading : vehicleReading_Model){
             String coordinates = vehicleReading.getLatitude().toString() +","+ vehicleReading.getLongitude().toString() ;
-//            System.out.println( revGeoLocationService.getLocation(coordinates) );
-
                 addresses.add( getLocation(coordinates) );
-
-
         }
-
         return addresses;
     }
+
 }

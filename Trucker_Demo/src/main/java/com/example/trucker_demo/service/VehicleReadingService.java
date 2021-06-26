@@ -26,7 +26,7 @@ public class VehicleReadingService {
     public void saveAllVehicleReadings(VehicleReading_Model vehicleReading_model) {
 
         VehicleDetails_Model vehicleDetails_model = vehicleDetailsRepo.findByVin( vehicleReading_model.getVin() );
-
+        /** Creating constructor to allot UUID to each reading */
         VehicleReading_Model tempReadingModel = new VehicleReading_Model();
         tempReadingModel.setVin(vehicleReading_model.getVin());
         tempReadingModel.setLatitude(vehicleReading_model.getLatitude());
@@ -47,12 +47,12 @@ public class VehicleReadingService {
 
     }
 
-    /** REST api for getting all vehicles all readings */
+    /** Returns all vehicle readings */
     public List<VehicleReading_Model> getAllVehicleReadings() {
         return vehicleReadingsRepo.findAll();
     }
 
-    /** Rest api for getting vehicles co ordinates over last 30 mins */
+    /** Returns vehicle readings over last 30 mins */
     public List<VehicleReading_Model> getVehicleCoordinates(String vin) {
         return vehicleReadingsRepo.findAllByVin(vin);
     }
