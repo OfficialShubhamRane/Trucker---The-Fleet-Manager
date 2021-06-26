@@ -4,7 +4,6 @@ import com.example.trucker_demo.model.Alerts_Model;
 import com.example.trucker_demo.model.VehicleDetails_Model;
 import com.example.trucker_demo.model.VehicleLocation_Model;
 import com.example.trucker_demo.model.VehicleReading_Model;
-import com.example.trucker_demo.repository.VehicleReadingsRepo;
 import com.example.trucker_demo.service.AlertsService;
 import com.example.trucker_demo.service.RevGeoLocationService;
 import com.example.trucker_demo.service.VehicleDetailService;
@@ -15,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class TruckerDemo_Controller {
@@ -47,47 +44,47 @@ public class TruckerDemo_Controller {
     @ResponseBody
     public void postVehicleReadings(
             @RequestBody VehicleReading_Model vehicleReading_model){
-
         vehicleReadingsService.saveAllVehicleReadings(vehicleReading_model);
     }
 
-    /** 3.1 REST API: Returns all vehicles all details */
+    /** 3.1 Returns all vehicles all details */
     @GetMapping("/api/vehicles")
     public List<VehicleDetails_Model> getAllVehiclesDetails(){
         return vehicleDetailsService.getAllVehicleDetails();
     }
 
-    /** REST API: Returns all vehicles all readings */
+    /** Returns all vehicles all readings */
     @GetMapping("/api/readings")
     public List<VehicleReading_Model> getAllVehiclesReading(){
         return vehicleReadingsService.getAllVehicleReadings();
     }
 
-    /** REST API: Returns all vehicles all alerts */
+    /** Returns specific vehicles all details using VIN as key */
+    @GetMapping("/api/details/{vin}")
+    public VehicleDetails_Model getVehicleDetails(@PathVariable("vin") String vin){
+        return vehicleDetailsService.getVehicleDetails(vin);
+    }
+
+    /** Returns all vehicles all alerts */
+    /** Override this with Optional for requirment 3.5 */
     @GetMapping("/api/alerts")
     public List<Alerts_Model> getAllAlerts(){
         return alertsService.getAllAlerts();
     }
 
-    /** REST API: Returns specific vehicles all details using VIN as key */
-    @GetMapping("/api/getVehicleDetails/{vin}")
-    public VehicleDetails_Model getVehicleDetails(@PathVariable("vin") String vin){
-        return vehicleDetailsService.getVehicleDetails(vin);
-    }
-
-    /** 3.5 REST API: Returns specific vehicles all alerts using VIN as key */
-    @GetMapping("api/getVehicleAlerts/{vin}")
+    /** 3.5 Returns specific vehicles all alerts using VIN as key */
+    @GetMapping("api/alerts/{vin}")
     public List<Alerts_Model> getVehicleAlerts(@PathVariable("vin") String vin){
         return alertsService.getVehicleAlerts(vin);
     }
 
-    /** 3.2 REST API for returning all vehicles HIGH alerts from last 2 hours */
+    /** 3.2 returning all vehicles HIGH alerts from last 2 hours */
     @GetMapping({"api/getRecentAlerts","api/getRecentAlerts/{orderBy}"})
     public List<Alerts_Model> getRecentAlerts(@PathVariable(required = false) String orderBy){
         return alertsService.getRecentAlerts(orderBy);
     }
 
-    /** 3.3 REST api for returning specific signal history of specific vehicles over user defined time range */
+    /** 3.3 Returning specific signal history of specific vehicles over user defined time range */
     /*
     @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
     public List<VehicleReading_Model> getSignalHistoryOver(
@@ -125,9 +122,7 @@ public class TruckerDemo_Controller {
     public List<VehicleLocation_Model> getVehicleLocation(
             @PathVariable("vin") String vin
     ) throws IOException, InterruptedException {
-
         return revGeoLocationService.getVehicleLocation(vin);
-
     }
 
 }
