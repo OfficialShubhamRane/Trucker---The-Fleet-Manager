@@ -19,6 +19,6 @@ public interface VehicleReadingsRepo extends JpaRepository<VehicleReading_Model,
             @Param("minutes") String minutes);
      */
 
-    @Query("SELECT r FROM VehicleReading_Model r WHERE r.timestamp <= (CURRENT_TIMESTAMP - '+0 00:30:00.000000000')")
+    @Query("SELECT r FROM VehicleReading_Model r WHERE r.timestamp <= (CURRENT_TIMESTAMP - '+0 00:30:00.000000000') AND r.vin = ?1")
     List<VehicleReading_Model> findAllByVin(String vin);
 }

@@ -76,10 +76,17 @@ public class RevGeoLocationService {
 
         List<VehicleReading_Model> vehicleReading_Model = vehicleReadingsService.getVehicleCoordinates(vin);
         List<VehicleLocation_Model> addresses = new ArrayList<>();
+        VehicleLocation_Model tempLocation_Model;
 
         for (VehicleReading_Model vehicleReading : vehicleReading_Model){
             String coordinates = vehicleReading.getLatitude().toString() +","+ vehicleReading.getLongitude().toString() ;
-                addresses.add( getLocation(coordinates) );
+
+            tempLocation_Model = getLocation(coordinates);
+
+            if(tempLocation_Model.getLocationName() != null){
+                addresses.add( tempLocation_Model );
+            }
+
         }
         return addresses;
     }
