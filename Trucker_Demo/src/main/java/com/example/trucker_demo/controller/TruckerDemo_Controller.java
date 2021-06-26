@@ -91,21 +91,6 @@ public class TruckerDemo_Controller {
         return vehicleDetailsService.getVehicleDetails(vin);
     }
 
-
-
-
-
-    /** 3.3 Returning specific signal history of specific vehicles over user defined time range */
-    /*
-    @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
-    public List<VehicleReading_Model> getSignalHistoryOver(
-            @PathVariable String vin,
-            @PathVariable String attribute,
-            @PathVariable String minutes){
-        return vehicleReadingsService.getSignalHistoryOver(vin, attribute, minutes);
-    }
-    */
-
     /** 3.4 Demo */
     @GetMapping("api/getGeoCode")
     public void getRevGeoCoding() throws IOException, InterruptedException {
@@ -128,6 +113,13 @@ public class TruckerDemo_Controller {
 
     }
 
-
+    /** 3.3 Returning specific signal history of specific vehicles over user defined time range */
+    @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
+    public List<String> getSignalHistoryOver(
+            @PathVariable String vin,
+            @PathVariable String attribute,
+            @PathVariable String minutes){
+        return vehicleReadingsService.getSignalHistoryOver(vin, attribute, minutes);
+    }
 
 }

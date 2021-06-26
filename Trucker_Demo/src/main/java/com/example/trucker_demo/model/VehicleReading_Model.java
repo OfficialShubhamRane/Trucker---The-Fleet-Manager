@@ -23,7 +23,7 @@ public class VehicleReading_Model {
     private Double longitude;
     private Date timestamp;
     private Float fuelVolume;
-    private Float speed;
+    private String speed;
     private Integer engineHp;
     private boolean checkEngineLightOn;
     private boolean engineCoolantLow;

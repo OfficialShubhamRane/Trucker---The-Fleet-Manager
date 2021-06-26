@@ -57,9 +57,16 @@ public class VehicleReadingService {
         return vehicleReadingsRepo.findAllByVin(vin);
     }
 
-//    /** returning specific signal history of specific vehicles over user defined time range */
-//    public List<VehicleReading_Model> getSignalHistoryOver(String vin, String attribute, String minutes) {
-//        return vehicleReadingsRepo.findAllSignalReadings(vin, attribute, minutes);
-//    }
+    /** returning specific signal history of specific vehicles over user defined time range */
+    public List<String> getSignalHistoryOver(String vin, String attribute, String minutes) {
+        List<VehicleReading_Model> vehicleReading_models =  vehicleReadingsRepo.findAllSignalReadings(vin, minutes);
+        List<String> requiredDataList = null;
+
+        for( VehicleReading_Model vehicleReading_model : vehicleReading_models){
+            requiredDataList.add(vehicleReading_model.getSpeed());
+        }
+        return requiredDataList;
+
+    }
 
 }
