@@ -32,7 +32,7 @@ public class TruckerDemo_Controller {
     @Autowired
     RevGeoLocationService revGeoLocationService;
 
-    /** 1.1 & 1.2 Accepts vehicle details from http://localhost:8080/vehicles */
+    /** 1.1 , 1.2 Accepts vehicle details from http://localhost:8080/vehicles */
     @PutMapping("/vehicles")
     @ResponseBody
     public void postVehicleDetails(
@@ -40,7 +40,7 @@ public class TruckerDemo_Controller {
         vehicleDetailsService.saveAllVehicleDetails(vehicleDetails_model);
     }
 
-    /** 1.3 & 3.6 Accepts vehicle readings from http://localhost:8080/readings */
+    /** 1.3 , 3.6 Accepts vehicle readings from http://localhost:8080/readings */
     @PostMapping("/readings")
     @ResponseBody
     public void postVehicleReadings(
@@ -58,6 +58,15 @@ public class TruckerDemo_Controller {
     @GetMapping({"api/getRecentAlerts","api/getRecentAlerts/{orderBy}"})
     public List<Alerts_Model> getRecentAlerts(@PathVariable(required = false) String orderBy){
         return alertsService.getRecentAlerts(orderBy);
+    }
+
+    /** 3.3 Returning specific signal history of specific vehicles over user defined time range */
+    @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
+    public List<String> getSignalHistoryOver(
+            @PathVariable String vin,
+            @PathVariable String attribute,
+            @PathVariable String minutes){
+        return vehicleReadingsService.getSignalHistoryOver(vin, attribute, minutes);
     }
 
     /** 3.4 Vehicle's location in last 30 mins */
@@ -79,47 +88,39 @@ public class TruckerDemo_Controller {
         }
     }
 
-    /** Debugging: Returns all vehicles all readings */
-    @GetMapping("/api/readings")
-    public List<VehicleReading_Model> getAllVehiclesReading(){
-        return vehicleReadingsService.getAllVehicleReadings();
-    }
 
-    /** Debugging: Returns specific vehicles all details using VIN as key */
-    @GetMapping("/api/details/{vin}")
-    public VehicleDetails_Model getVehicleDetails(@PathVariable("vin") String vin){
-        return vehicleDetailsService.getVehicleDetails(vin);
-    }
-
-    /** 3.4 Demo */
-    @GetMapping("api/getGeoCode")
-    public void getRevGeoCoding() throws IOException, InterruptedException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        String response = revGeoLocationService.revGeoCode("41.803194,-88.144406");
-//        System.out.println(response);
-        JsonNode responseJsonNode = mapper.readTree(response);
-        JsonNode items = responseJsonNode.get("items");
-
-        for (JsonNode item : items) {
-            JsonNode address = item.get("address");
-            String label = address.get("label").asText();
-            JsonNode position = item.get("position");
-
-            String lat = position.get("lat").asText();
-            String lng = position.get("lng").asText();
-            System.out.println(label + " is located at " + lat + "," + lng + ".");
-        }
-
-    }
-
-    /** 3.3 Returning specific signal history of specific vehicles over user defined time range */
-    @GetMapping("api/getSignalHistoryOver/{vin}/{attribute}/{minutes}")
-    public List<String> getSignalHistoryOver(
-            @PathVariable String vin,
-            @PathVariable String attribute,
-            @PathVariable String minutes){
-        return vehicleReadingsService.getSignalHistoryOver(vin, attribute, minutes);
-    }
+//    /** Debugging: Returns all vehicles all readings */
+//    @GetMapping("/api/readings")
+//    public List<VehicleReading_Model> getAllVehiclesReading(){
+//        return vehicleReadingsService.getAllVehicleReadings();
+//    }
+//
+//    /** Debugging: Returns specific vehicles all details using VIN as key */
+//    @GetMapping("/api/details/{vin}")
+//    public VehicleDetails_Model getVehicleDetails(@PathVariable("vin") String vin){
+//        return vehicleDetailsService.getVehicleDetails(vin);
+//    }
+//
+//    /** 3.4 Demo */
+//    @GetMapping("api/getGeoCode")
+//    public void getRevGeoCoding() throws IOException, InterruptedException {
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        String response = revGeoLocationService.revGeoCode("41.803194,-88.144406");
+////        System.out.println(response);
+//        JsonNode responseJsonNode = mapper.readTree(response);
+//        JsonNode items = responseJsonNode.get("items");
+//
+//        for (JsonNode item : items) {
+//            JsonNode address = item.get("address");
+//            String label = address.get("label").asText();
+//            JsonNode position = item.get("position");
+//
+//            String lat = position.get("lat").asText();
+//            String lng = position.get("lng").asText();
+//            System.out.println(label + " is located at " + lat + "," + lng + ".");
+//        }
+//
+//    }
 
 }
