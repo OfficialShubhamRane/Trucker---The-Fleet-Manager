@@ -23,13 +23,11 @@ public class VehicleReadings_Controller {
 
     /** returns vehicle readings */
     @GetMapping({"api/readings", "api/readings/{vin}"})
-    public List<VehicleReading_Model> getVehicleReadings(
-            @PathVariable(required = false) String vin
-    ){
+    public List<VehicleReading_Model> getVehicleReadings(@PathVariable(required = false) String vin){
         return vehicleReading_service.getVehicleReadings(vin);
     }
 
-    /** return vehicle location over last 30 mins */
+    /** returns vehicle location over last 30 mins */
     @GetMapping("/api/location/{vin}")
     public List<VehicleLocation_Model> getVehicleLocation(@PathVariable String vin) throws IOException, InterruptedException {
         return vehicleReading_service.getVehicleLocation(vin);

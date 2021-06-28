@@ -48,6 +48,7 @@ public class VehicleReading_Service {
         return  vehicleReading_list;
     }
 
+    /** getVehicleLocation -> getLocation -> revGeoCode */
     /** returns vehicle location over last 30 mins */
     public List<VehicleLocation_Model> getVehicleLocation(String vin) throws IOException, InterruptedException {
         List<VehicleReading_Model> vehicleReading_Model =  vehicleReadings_repository.getVehicleLocation(vin);
