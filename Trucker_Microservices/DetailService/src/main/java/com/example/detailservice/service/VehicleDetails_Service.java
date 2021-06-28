@@ -28,14 +28,16 @@ public class VehicleDetails_Service {
     public List<VehicleDetails_Model> getVehicleDetails(String vin) {
 
         List<VehicleDetails_Model> vehicleDetails_list = new ArrayList<>();
+
         if(vin == null){
             vehicleDetails_list = vehicleDetails_repository.findAll();
         }else if( vehicleDetails_repository.existsById(vin) ){
             vehicleDetails_list.add(vehicleDetails_repository.findByVin(vin));
         }else{
-            System.out.println("No details exists");
+            System.out.println("No details exists for this vin");
         }
 
         return vehicleDetails_list;
     }
+
 }

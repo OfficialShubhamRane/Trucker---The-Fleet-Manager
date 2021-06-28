@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VehicleDetails_Repository extends JpaRepository<VehicleDetails_Model, String> {
 
-    /** Returns vehicle details by ID */
+    /** Returns vehicle details by vin */
     VehicleDetails_Model findByVin(String vin);
 }
