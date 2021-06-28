@@ -7,6 +7,8 @@ import com.example.alertservice.repository.VehicleAlerts_Repository;
 import com.example.alertservice.repository.VehicleDetails_Repository;
 import com.example.alertservice.repository.VehicleReadings_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +18,16 @@ import java.util.List;
 public class VehicleAlerts_Service {
 
     @Autowired
-    VehicleAlerts_Repository vehicleAlerts_repository;
-
-    @Autowired
     VehicleDetails_Repository vehicleDetails_repository;
 
     @Autowired
     VehicleReadings_Repository vehicleReadings_repository;
+
+    @Autowired
+    VehicleAlerts_Repository vehicleAlerts_repository;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     /** Checks if Vin is valid and does necessary */
     public List<VehicleAlerts_Model> getVehicleAlerts(String vin) {
@@ -62,10 +67,10 @@ public class VehicleAlerts_Service {
 
                 vehicleAlerts_repository.save(vehicleAlerts_model);
 
-//                String body = "Vehicle "+vin+" is crossing the Red line RPM of " + vehicleDetails_model.getRedlineRpm()
-//                        + " to " + vehicleReading_model.getEngineRpm();
-//                String subject = "HIGH priority alert on vehicle: "+vin;
-//                mailSenderService.sendEmail(body ,subject );
+                String body = "Vehicle "+vin+" is crossing the Red line RPM of " + vehicleDetails_model.getRedlineRpm()
+                        + " to " + vehicleReading_model.getEngineRpm();
+                String subject = "HIGH priority alert on vehicle: "+vin;
+                sendEmail(body ,subject );
 //                System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
             }
@@ -126,6 +131,19 @@ public class VehicleAlerts_Service {
 
         }
         return vehicleAlerts_List;
+
+    }
+
+    /** Sends email */
+    private void sendEmail(String body, String subject){
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("from.springboot.gmail.com");
+        message.setTo("shubham16.ranez@gmail.com");
+        message.setSubject(subject);
+        message.setText(body);
+
+        javaMailSender.send(message);
 
     }
 

@@ -4,6 +4,8 @@ import com.example.readingservice.model.VehicleLocation_Model;
 import com.example.readingservice.model.VehicleReading_Model;
 import com.example.readingservice.service.VehicleReading_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,10 +17,14 @@ public class VehicleReadings_Controller {
     @Autowired
     VehicleReading_Service vehicleReading_service;
 
+    @Autowired
+    DiscoveryClient discoveryClient;
+
     /** accepts vehicle readings */
     @PostMapping("/readings")
     public void postVehicleReadings(@RequestBody VehicleReading_Model vehicleReading_model){
         vehicleReading_service.saveVehicleReadings(vehicleReading_model);
+
     }
 
     /** returns vehicle readings */
@@ -33,5 +39,9 @@ public class VehicleReadings_Controller {
         return vehicleReading_service.getVehicleLocation(vin);
     }
 
-
+    @GetMapping("/service/{applicationName}")
+    public List<ServiceInstance> serviceInstancesByApplicationName(
+            @PathVariable String applicationName) {
+        return this.discoveryClient.getInstances(applicationName);
+    }
 }
