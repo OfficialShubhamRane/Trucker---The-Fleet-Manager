@@ -5,7 +5,7 @@ Fleet Managment Application for Egen Solutions.
 Sample Data:
     Vehicle Details: 
     Make PUT request on http://localhost:8080/vehicles
-        [
+       
             {
                 "vin": "1HGCR2F3XFA027534",
                 "make": "HONDA",
@@ -24,7 +24,6 @@ Sample Data:
                 "maxFuelVolume": 18,
                 "lastServiceDate": "2017-03-25T17:31:25.268Z"
             }
-        ]
 
     Vehicle Reading:
     Make POST request on http://localhost:8080/readings
