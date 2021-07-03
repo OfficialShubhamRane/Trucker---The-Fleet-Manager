@@ -12,7 +12,7 @@ import java.util.List;
 public interface VehicleReadingsRepo extends JpaRepository<VehicleReading_Model, String> {
 
 
-    @Query("SELECT r FROM VehicleReading_Model r WHERE r.vin = ?1 AND r.timestamp <= (CURRENT_TIMESTAMP - '+0 00:'+?2+':00.000000000') ORDER BY r.timestamp ASC")
+    @Query("SELECT r FROM VehicleReading_Model r WHERE r.vin = ?1 AND r.timestamp <= (CURRENT_TIMESTAMP - ?2) ORDER BY r.timestamp ASC")
     List<VehicleReading_Model> findAllSignalReadings(
             @Param("vin") String vin,
             @Param("minutes") String minutes);

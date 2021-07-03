@@ -1,5 +1,6 @@
 package com.example.trucker_demo.service;
 
+import com.example.trucker_demo.model.Constants;
 import com.example.trucker_demo.model.VehicleLocation_Model;
 import com.example.trucker_demo.model.VehicleReading_Model;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,6 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 @Service
@@ -24,7 +26,7 @@ public class RevGeoLocationService {
     VehicleReadingService vehicleReadingsService;
 
     private static final String GEOCODING_RESOURCE = "https://revgeocode.search.hereapi.com/v1/revgeocode";
-    private static final String API_KEY = "SpbwGUl2-MIjGSbYWWwXdWshcNKeJOCVAYZCvrXIXaM";
+    private static final String TruckerGeoCodingAPIKey = Constants.TRUCKER_LOCATION_API_KEY;
 
     /** Return location in form of http response body */
     public String revGeoCode(String query) throws IOException, InterruptedException {
@@ -32,7 +34,7 @@ public class RevGeoLocationService {
         HttpClient httpClient = HttpClient.newHttpClient();
 
         String encodedQuery = URLEncoder.encode(query,"UTF-8");
-        String requestUri = GEOCODING_RESOURCE + "?apiKey=" + API_KEY + "&at=" + encodedQuery + "&lang=en-US";
+        String requestUri = GEOCODING_RESOURCE + "?apiKey=" + TruckerGeoCodingAPIKey + "&at=" + encodedQuery + "&lang=en-US";
 //        System.out.println(requestUri);
         HttpRequest geocodingRequest = HttpRequest.newBuilder().GET().uri(URI.create(requestUri))
                 .timeout(Duration.ofMillis(2000)).build();
