@@ -4,7 +4,7 @@ Fleet Managment Application for Egen Solutions.
     •	Developed a feature that monitors condition-based activities, triggering an Email alert notification
     •	Provided real-time insights for operations of Fleet performance focusing on Driver Safety, Cost Reduction, ELD Complied Fleet Tracking
     
-The purpose of fleet management is to oversee all fleet  performance and fleet maintenance in order to increase productivity and help a business run as smoothly as possible.
+The purpose of fleet management is to oversee all fleet  performance and fleet maintenance in order to increase productivity.
 
 Deliveriables:
 1. Develop following REST endpoints for ingestion from: [http://mocker.egen.io]
