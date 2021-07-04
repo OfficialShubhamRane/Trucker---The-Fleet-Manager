@@ -1,55 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e9915d9-a33b-4006-a911-462d83b5ed22" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/src/main/java/com/example/eurekaservicediscovery/EurekaServiceDiscoveryApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EurekaServiceDiscovery/src/test/java/com/example/eurekaservicediscovery/EurekaServiceDiscoveryApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Trucker_Demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Trucker_Demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Trucker_Demo/src/main/java/com/example/trucker_demo/controller/TruckerDemo_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Trucker_Demo/src/main/java/com/example/trucker_demo/controller/TruckerDemo_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Trucker_Demo/src/main/java/com/example/trucker_demo/repository/VehicleReadingsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Trucker_Demo/src/main/java/com/example/trucker_demo/repository/VehicleReadingsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/src/main/java/com/example/vehicledetailshandler/VehicleDetailsHandlerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/src/main/java/model/VehicleDetails_Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/VehicleDetailsHandler/src/test/java/com/example/vehicledetailshandler/VehicleDetailsHandlerApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/src/main/java/com/example/vehicledetailshandler/VehicleDetailsHandlerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/src/main/java/com/example/vehicledetailshandler/model/VehicleDetails_Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleDetailsHandler/src/test/java/com/example/vehicledetailshandler/VehicleDetailsHandlerApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/src/main/java/com/example/vehiclereadinghandler/VehicleReadingHandlerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/src/main/java/com/example/vehiclereadinghandler/model/Tires_Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/src/main/java/com/example/vehiclereadinghandler/model/VehicleReading_Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleReadingHandler/src/test/java/com/example/vehiclereadinghandler/VehicleReadingHandlerApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="5e9915d9-a33b-4006-a911-462d83b5ed22" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +34,7 @@
       <option name="presentableId" value="Default" />
       <updated>1624809591900</updated>
       <workItem from="1624809594865" duration="178000" />
+      <workItem from="1625345513645" duration="17000" />
     </task>
     <servers />
   </component>

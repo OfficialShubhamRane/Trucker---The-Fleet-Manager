@@ -1,6 +1,5 @@
 package com.example.readingservice.repository;
 
-import com.example.readingservice.model.VehicleLocation_Model;
 import com.example.readingservice.model.VehicleReading_Model;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

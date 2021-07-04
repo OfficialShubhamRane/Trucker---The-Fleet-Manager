@@ -5,9 +5,6 @@ import com.example.detailservice.repository.VehicleDetails_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class VehicleDetails_Service {
 
@@ -25,19 +22,17 @@ public class VehicleDetails_Service {
     }
 
     /** returns vehicle details */
-    public List<VehicleDetails_Model> getVehicleDetails(String vin) {
+    public VehicleDetails_Model getVehicleDetails(String vin) {
 
-        List<VehicleDetails_Model> vehicleDetails_list = new ArrayList<>();
-
-        if(vin == null){
-            vehicleDetails_list = vehicleDetails_repository.findAll();
-        }else if( vehicleDetails_repository.existsById(vin) ){
-            vehicleDetails_list.add(vehicleDetails_repository.findByVin(vin));
+//        if(vin == null){
+//            vehicleDetails_list = vehicleDetails_repository.findAll();
+//        }else
+        if( vehicleDetails_repository.existsById(vin) ){
+            return vehicleDetails_repository.findByVin(vin);
         }else{
             System.out.println("No details exists for this vin");
         }
-
-        return vehicleDetails_list;
+        return null;
     }
 
 }

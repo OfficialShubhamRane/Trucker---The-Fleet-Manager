@@ -6,7 +6,6 @@ import com.example.readingservice.repository.VehicleReadings_Repository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,13 +27,11 @@ public class VehicleReading_Service {
     @Autowired
     VehicleReading_Service vehicleReading_service;
 
-    @Autowired
-    DiscoveryClient discoveryClient;
 
     /** saves all vehicle readings */
     public void saveVehicleReadings(VehicleReading_Model vehicleReading_model) {
         vehicleReadings_repository.save(vehicleReading_model);
-        System.out.println(discoveryClient.getInstances("ALERT-SERVICE"));
+
     }
 
     /** returns vehicle readings */

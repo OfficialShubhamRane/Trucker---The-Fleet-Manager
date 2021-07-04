@@ -29,30 +29,32 @@ public class VehicleAlerts_Service {
     @Autowired
     JavaMailSender javaMailSender;
 
-    /** Checks if Vin is valid and does necessary */
-    public List<VehicleAlerts_Model> getVehicleAlerts(String vin) {
-
-        List<VehicleAlerts_Model> vehicleAlerts_List = new ArrayList<>();
-
-        if(vehicleReadings_repository.existsByVin(vin)){
-            vehicleAlerts_List =  checkForAlerts(vin);
-        }else{
-            System.out.println("Wrong vin");
-        }
-        return vehicleAlerts_List;
-    }
+//    /** Checks if Vin is valid and does necessary */
+//    public List<VehicleAlerts_Model> getVehicleAlerts(String vin) {
+//
+//        List<VehicleAlerts_Model> vehicleAlerts_List = new ArrayList<>();
+//
+//        if(vehicleReadings_repository.existsByVin(vin)){
+//            vehicleAlerts_List =  checkForAlerts(vin);
+//        }else{
+//            System.out.println("Wrong vin");
+//        }
+//        return vehicleAlerts_List;
+//    }
 
     /** Condition based alert checking */
-    private List<VehicleAlerts_Model> checkForAlerts(String vin) {
+    public List<VehicleAlerts_Model> checkForAlerts(String vehicleDetails_vin,
+                                                    String vehicleReadings_vin ) {
 
-        VehicleDetails_Model vehicleDetails_model = vehicleDetails_repository.findByVin(vin);
-        List<VehicleReading_Model> vehicleReading_List = vehicleReadings_repository.findAllByVin(vin);
+        VehicleDetails_Model vehicleDetails_model = vehicleDetails_repository.findByVin(vehicleDetails_vin);
+        List<VehicleReading_Model> vehicleReading_List = vehicleReadings_repository.findAllByVin(vehicleReadings_vin);
         List<VehicleAlerts_Model> vehicleAlerts_List = new ArrayList<>();
         String alertRule = null;
         String alertLevel = null;
 
-        for(VehicleReading_Model vehicleReading_model : vehicleReading_List ){
+        for(VehicleReading_Model vehicleReading_model : vehicleReading_List){
 
+            System.out.println(vehicleDetails_model);
             /** engineRpm > readlineRpm, Priority: HIGH */
             if( vehicleReading_model.getEngineRpm() > vehicleDetails_model.getRedlineRpm()){
                 alertRule = "Rule 1";
@@ -67,11 +69,11 @@ public class VehicleAlerts_Service {
 
                 vehicleAlerts_repository.save(vehicleAlerts_model);
 
-                String body = "Vehicle "+vin+" is crossing the Red line RPM of " + vehicleDetails_model.getRedlineRpm()
+                String body = "Vehicle "+vehicleReading_model.getVin()+" is crossing the Red line RPM of " + vehicleDetails_model.getRedlineRpm()
                         + " to " + vehicleReading_model.getEngineRpm();
-                String subject = "HIGH priority alert on vehicle: "+vin;
+                String subject = "HIGH priority alert on vehicle: "+vehicleReading_model.getVin();
                 sendEmail(body ,subject );
-//                System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
+                System.out.println(vehicleReading_model.getVin() + " EngineRPM > RedLineRPM, Priority: HIGH");
 
             }
 
@@ -88,7 +90,7 @@ public class VehicleAlerts_Service {
                 vehicleAlerts_List.add(vehicleAlerts_model);
 
                 vehicleAlerts_repository.save(vehicleAlerts_model);
-//                System.out.println( vehicleReading_model.getVin() + ": fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM ");
+                System.out.println( vehicleReading_model.getVin() + ": fuelVolume < 10% of maxFuelVolume, Priority: MEDIUM ");
 
             }
 
@@ -108,7 +110,7 @@ public class VehicleAlerts_Service {
                 vehicleAlerts_List.add(vehicleAlerts_model);
 
                 vehicleAlerts_repository.save(vehicleAlerts_model);
-//            System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW, Priority: LOW");
+                System.out.println(vehicleReading_model.getVin() + " Tire pressure LOW, Priority: LOW");
 
             }
 
@@ -125,11 +127,12 @@ public class VehicleAlerts_Service {
                 vehicleAlerts_List.add(vehicleAlerts_model);
 
                 vehicleAlerts_repository.save(vehicleAlerts_model);
-//            System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON, Priority: LOW");
+                System.out.println(vehicleReading_model.getVin() + ": Either Engine coolant is LOW OR Engine lights are ON, Priority: LOW");
 
             }
 
         }
+
         return vehicleAlerts_List;
 
     }
