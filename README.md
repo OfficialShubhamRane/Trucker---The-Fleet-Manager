@@ -1,8 +1,8 @@
 # Trucker---The-Fleet-Manager
-Fleet Managment System:
-    * Built a REST API-based Fleet Management Service to increase productivity to run businesses smoothly 
-    * Developed a feature that monitors condition-based activities, triggering an Email alert notification
-    * Provided real-time insights for operations of Fleet performance focusing on Driver Safety, Cost Reduction, ELD Complied Fleet Tracking
+
+ * Built a REST API-based Fleet Management Service to increase productivity to run businesses smoothly 
+ * Developed a feature that monitors condition-based activities, triggering an Email alert notification
+ * Provided real-time insights for operations of Fleet performance focusing on Driver Safety, Cost Reduction, ELD Complied Fleet Tracking
     
 The purpose of fleet management is to oversee all fleet  performance and fleet maintenance in order to increase productivity.
 
