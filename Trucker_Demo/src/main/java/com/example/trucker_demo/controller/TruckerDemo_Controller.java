@@ -8,8 +8,6 @@ import com.example.trucker_demo.service.AlertsService;
 import com.example.trucker_demo.service.RevGeoLocationService;
 import com.example.trucker_demo.service.VehicleDetailService;
 import com.example.trucker_demo.service.VehicleReadingService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +29,13 @@ public class TruckerDemo_Controller {
 
     @Autowired
     RevGeoLocationService revGeoLocationService;
+
+    /** Front end index page */
+    @GetMapping("/")
+    public String getIndex(){
+        System.out.println("Inside the index");
+        return "index";
+    }
 
     /** 1.1 , 1.2 Accepts vehicle details from http://localhost:8080/vehicles */
     @PutMapping("/vehicles")
